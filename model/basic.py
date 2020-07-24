@@ -23,6 +23,9 @@ class NaryLSTMLayer(nn.Module): # N-ary Tree-LSTM in the paper of treelstm
         init.kaiming_normal_(self.comp_linear.weight.data)
         init.constant_(self.comp_linear.bias.data, val=0)
 
+    def myforward(self):
+        return
+
     def forward(self, l=None, r=None, x=None):
         """
         Args:
@@ -39,43 +42,20 @@ class NaryLSTMLayer(nn.Module): # N-ary Tree-LSTM in the paper of treelstm
             r = (self.zero, self.zero)
         hr, cr = r
         hl, cl = l
-        h_cat = torch.cat([hx, hl, hr], dim=1)
+        h_cat = torch.cat([hx, hl, hr]) #dence dim encoding
         comp_vector = self.comp_linear(h_cat)
         i, fl, fr, u, o = torch.chunk(comp_vector, chunks=5, dim=1)
         c = (cl*(fl + 1).sigmoid() + cr*(fr + 1).sigmoid() + u.tanh()*i.sigmoid())
         h = o.sigmoid() * c.tanh()
         return h, c 
+        
 
-class TriPadLSTMLayer(nn.Module): # used in my paper
-    def __init__(self, hidden_dim):
-        super().__init__()
-        self.hidden_dim = hidden_dim
-        self.comp_linear = nn.Linear(in_features=3 * hidden_dim,
-                                    out_features=6 * hidden_dim)
-        self.reset_parameters()
-
-    def reset_parameters(self):
-        init.kaiming_normal_(self.comp_linear.weight.data)
-        init.constant_(self.comp_linear.bias.data, val=0)
-
-    def forward(self, l=None, r=None, m=None):
-        """
-        Args:
-            l: (h_l, c_l) tuple, where h and c have the size (batch_size, hidden_dim)
-            r: (h_r, c_r) tuple
-            m: (h_m, c_m) tuple. 
-        Returns:
-            h, c : The hidden and cell state of the composed parent
-        """
-        hm, cm = m
-        zero = torch.zeros(1, self.hidden_dim).to(hm.device)
-        if l is None:
-            l = (zero, zero)
+        # do we really need this bullshit?
         if r is None:
             r = (zero, zero)
         hr, cr = r
         hl, cl = l
-        h_cat = torch.cat([hl, hm, hr], dim=1)
+        h_cat = torch.cat([hl, hm, hr])
         comp_vector = self.comp_linear(h_cat)
         i, fl, fm, fr, u, o = torch.chunk(comp_vector, chunks=6, dim=1)
         c = cl*(fl+1).sigmoid() + cm*(fm+1).sigmoid() + cr*(fr+1).sigmoid() + u.tanh()*i.sigmoid()

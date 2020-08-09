@@ -4,8 +4,8 @@ import numpy as np
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--txt', required=True)
-    parser.add_argument('--pt', required=True)
+    parser.add_argument('--txt', help='>', required=True)
+    parser.add_argument('--pt', help='>',required=True)
     args = parser.parse_args()
     
     glove = {}

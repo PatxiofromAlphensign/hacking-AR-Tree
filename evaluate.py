@@ -53,7 +53,7 @@ def main(args):
     device = torch.device('cuda' if args.cuda else 'cpu')
     args.device = device
     args.batch_size = 128 if args.mode == 'val' else 1 # batch_size=1 for visualize
-    # load model parameters from checkpoint
+    #load model parameters from checkpoint
     loaded = torch.load(args.ckpt, map_location={'cuda:0':'cpu'})
     model_kwargs = loaded['model_kwargs']
     for k, v in model_kwargs.items():
@@ -76,7 +76,7 @@ def main(args):
     else:
         Model = SingleModel
     model = Model(**vars(args))
-
+    return model
     num_params = sum(np.prod(p.size()) for p in model.parameters())
     num_embedding_params = np.prod(model.word_embedding.weight.size())
     print(f'# of parameters: {num_params}')
@@ -129,5 +129,5 @@ if __name__ == '__main__':
     parser.add_argument('--mode', choices=['vis', 'val'], help='visualize or validate')
     parser.add_argument('--glove', default='glove.840B.300d', help='used only by torchtext')
     args = parser.parse_args()
-    main(args)
+    print(main(args))
 

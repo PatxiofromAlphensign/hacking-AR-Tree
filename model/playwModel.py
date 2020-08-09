@@ -4,7 +4,7 @@ import numpy as np
 from random import randint
 
 
-def create_forward_inputs():
+def create_forward_inputs_dummy():
     samed_ones = iterative_forward(10, 4)
     Dx, Dy = np.array(samed_ones.shape)
     h, c = np.array([Dx, 10]), np.array([Dy, 10])
@@ -57,10 +57,12 @@ def iterative_forward(scale, rng):
         return samed_ones
 
 n = NaryLSTMLayer(4)
-l,r,x =  create_forward_inputs()
-cat = torch.cat([l,r,x])
-
-
+l,r,x =  create_forward_inputs_dummy()
+cat = torch.cat((l,r,x), axis=-2)
+cat_pad = torch.zeros(12,20).T
+cat_pad[:cat.shape[0], :cat.shape[1]] = cat
+n.comp_linear(cat_pad)
+print(cat_pad)
 
 #print(n.forward(l,r,x))
 

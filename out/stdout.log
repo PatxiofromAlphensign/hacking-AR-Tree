@@ -1,0 +1,28 @@
+2020-07-29 20:25:42,208 INFO     save_dir:out
+2020-07-29 20:25:42,209 INFO     data_path:sst
+2020-07-29 20:25:42,209 INFO     glove_path:None
+2020-07-29 20:25:42,209 INFO     glove:glove.840B.300d
+2020-07-29 20:25:42,210 INFO     data_type:sst2
+2020-07-29 20:25:42,210 INFO     model_type:RL
+2020-07-29 20:25:42,211 INFO     leaf_rnn_type:lstm
+2020-07-29 20:25:42,212 INFO     rank_input:h
+2020-07-29 20:25:42,212 INFO     word_dim:300
+2020-07-29 20:25:42,212 INFO     hidden_dim:None
+2020-07-29 20:25:42,213 INFO     clf_hidden_dim:None
+2020-07-29 20:25:42,213 INFO     clf_num_layers:None
+2020-07-29 20:25:42,213 INFO     dropout:None
+2020-07-29 20:25:42,214 INFO     use_batchnorm:False
+2020-07-29 20:25:42,214 INFO     cuda:False
+2020-07-29 20:25:42,215 INFO     sample_num:3
+2020-07-29 20:25:42,215 INFO     rl_weight:0.1
+2020-07-29 20:25:42,215 INFO     batch_size:None
+2020-07-29 20:25:42,216 INFO     max_epoch:None
+2020-07-29 20:25:42,216 INFO     lr:None
+2020-07-29 20:25:42,216 INFO     l2reg:None
+2020-07-29 20:25:42,217 INFO     clip:None
+2020-07-29 20:25:42,217 INFO     optimizer:None
+2020-07-29 20:25:42,218 INFO     patience:None
+2020-07-29 20:25:42,219 INFO     fix_word_embedding:False
+2020-07-29 20:25:44,598 INFO     Downloading file trainDevTestTrees_PTB.zip to sst/sst/trainDevTestTrees_PTB.zip.
+2020-07-29 20:26:06,491 INFO     File sst/sst/trainDevTestTrees_PTB.zip downloaded.
+2020-07-29 20:26:10,431 INFO     Downloading vectors from http://nlp.stanford.edu/data/glove.840B.300d.zip

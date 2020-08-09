@@ -46,8 +46,8 @@ class Vocab(object):
         return self._id_tf.get(id_, 0)
 
     def id_to_df(self, id_):
-        assert self._id_df is not None
-        return self._id_df.get(id_, 0)
+        assert self._id_tf is not None
+        return self._id_tf.get(id_, 0)
 
     def has_word(self, word):
         return word in self._vocab_dict
